@@ -1,0 +1,37 @@
+.centered {
+	text-align: center;
+}
+
+.table {
+	display: table;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	table-layout: fixed;
+	width: 800px;
+}
+
+.table-row {
+	display: table-row;
+}
+
+.table-cell {
+	display: table-cell;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
+	width: 100px;
+}
+
+.table-cell1 {
+	display: table-cell;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
+	width: 180px;
+}
+
+
+.hidden {
+	display: none;
+}

@@ -1,0 +1,51 @@
+package ws;
+
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+
+public class Main {
+	private BufferedReader in;
+    private PrintWriter out;
+    private Socket socket;
+    
+    public String getData(String location) throws UnknownHostException, IOException {
+    	try {
+			 socket = new Socket("ada.cs.hbg.psu.edu", 6714);
+			 // write text to the socket
+		      BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+		      bufferedWriter.write(location+";");
+		      bufferedWriter.flush();
+			
+		     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		     out = new PrintWriter(socket.getOutputStream(), true);	
+		     String input = "";
+			 char c;
+			    while ((c = (char) in.read()) != '~') {
+			        //out.println(c);
+			        input += Character.toString(c);
+			        //System.out.println("echo: " + in.readLine());
+			    }
+			    System.out.println(input);
+		     //String str = in.readLine();
+		     //System.out.println(str);
+		      // close the reader, and return the results as a String
+		      in.close();
+		     String message = input.toString();
+		     socket.close();
+		     return message;
+        }
+    	catch (SocketTimeoutException ste) 
+	    {
+	      System.err.println("Timed out waiting for the socket.");
+	      ste.printStackTrace();
+	      throw ste;
+	    }
+    }
+}
